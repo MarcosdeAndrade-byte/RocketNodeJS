@@ -8,30 +8,28 @@ app.use(express.json());
 
 const customers=[];
 
-// app.post('/account',(request,response)=>{
-//     //Para inserir dados através do Body (Utilização de desconstrução)
-//     const {cpf,name} = request.body;
-
-//     const id = id();
-
-//     customers.push({
-//         cpf,
-//         name,
-//         id,
-//         statement: []
-//     });
-//     return response.status(201).send();
-// });
-
 app.post("/account",(request, response)=>{
   const {cpf, name} = request.body; 
-  const id = uuidv4();
+
+  //Função para verificar se não existe um cpf duplicado (retorna um boolean) --> some(Se algum)
+  const customerAlreadyExists = customers.some(
+    (customer) => customer.cpf === cpf
+  );
+
+  //Se o CPF já existir retornamos um erro
+  if(customerAlreadyExists){
+    return response.status(400).json({error: "Customer already Exists!"});
+  }
+  
+  //Estamos utilizando o push para inserir os dados vindos do body no objeto 
   customers.push({
     cpf,
     name,
-    id,
+    id: uuidv4(),
     statement: []
   });
+
+  console.log(customers);
   return response.status(201).send();
 });
 
@@ -40,8 +38,3 @@ app.get('/return',(request,response)=>{
 });
 
 app.listen(3000);
-
-
-PrimeiroProjetoComNodeJs/package.json
-PrimeiroProjetoComNodeJs/src/index.js
-PrimeiroProjetoComNodeJs/yarn.lock
