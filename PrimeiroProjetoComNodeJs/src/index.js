@@ -8,7 +8,7 @@ app.use(express.json());
 
 const customers=[];
 
-app.post("/account",(request, response)=>{
+app.post("/account", (request, response)=>{
   const {cpf, name} = request.body; 
 
   //Função para verificar se não existe um cpf duplicado (retorna um boolean) --> some(Se algum)
@@ -20,7 +20,7 @@ app.post("/account",(request, response)=>{
   if(customerAlreadyExists){
     return response.status(400).json({error: "Customer already Exists!"});
   }
-  
+
   //Estamos utilizando o push para inserir os dados vindos do body no objeto 
   customers.push({
     cpf,
@@ -33,8 +33,10 @@ app.post("/account",(request, response)=>{
   return response.status(201).send();
 });
 
-app.get('/return',(request,response)=>{
-    return response.send("<h1>Olá mundo<h1>");
+app.get("/statement/:cpf", (request,response) => {
+    const {cpf} = request.params;
+    const customer = customers.find((customer) => customer.cpf === cpf);
+    return response.json(customer.statement);
 });
 
 app.listen(3000);
