@@ -10,11 +10,11 @@
  -[x] Deve ser possível buscar o extrato bancário do cliente por data
 - [x] Deve ser possível atualizar dados da conta do cliente
  -[x] Deve ser possível obter dados da conta do cliente
- -[] Deve ser possível deletar una conta
+ -[x] Deve ser possível deletar una conta
 ## Regras de negócio
  -[x] Não deve ser possível cadastrar uma conta com CPF já existente
  -[x] Não deve ser possível buscar extrato en uma conta não existente
  -[x] Não deve ser possível fazer depósito em una conta não existente
  -[x] Não deve ser possível fazer saque en uma conta não existente
-  [x] Não deve ser possível fazer saque quando o saldo for insuficiente
- -[] Não deve ser possível excluir uma conta não existente
+ -[x] Não deve ser possível fazer saque quando o saldo for insuficiente
+ -[x] Não deve ser possível excluir uma conta não existente
