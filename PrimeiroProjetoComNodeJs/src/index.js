@@ -1,12 +1,13 @@
+const { request, response, json } = require("express");
 const express = require("express");
 
 const{v4: uuidv4} = require("uuid");
 
-const app=express();
+const app = express();
 
 app.use(express.json());
 
-const customers=[];
+const customers = [];
 
 // Middleware para verificação do cpf
 function verifyIfExistsAccountCPF(request, response, next){
@@ -16,7 +17,7 @@ function verifyIfExistsAccountCPF(request, response, next){
     if(!customer){
         return response.status(400).json({ error: "Customer not found" });
     }
-
+   
     request.customer = customer;
     return next();
 }
@@ -42,7 +43,7 @@ app.post("/account", (request, response)=>{
     statement: []
   });
 
-  console.log(customers);
+  //console.log(customers); <-- Retorna o usuário que foi criado
   return response.status(201).send();
 });
 
@@ -53,7 +54,25 @@ quando queremos que todas as rotas sejam verificadas
 app.get("/statement",verifyIfExistsAccountCPF,(request,response) => {
     //Conseguimos ter acesso ao CPF pq o declaramos no Middleware
     const { customer } = request;
+    //console.log(customer); <-- Retorna o deposito e conta juntos
+    //console.log(customer.statement); <-- Retornar apenas o depósito
     return response.json(customer.statement);
+});
+
+app.post("/deposit",verifyIfExistsAccountCPF,(request,response) => {
+    const { description, amount } = request.body;
+    const { customer } = request;
+
+    const statementOperation = {
+        description,
+        amount,
+        created_at: new Date(),
+        type: "credit"
+    }
+
+    customer.statement.push(statementOperation);
+    //console.log(customer); <-- Verificar se o depósito foi feito
+    return response.status(201).send();
 });
 
 app.listen(3000);
