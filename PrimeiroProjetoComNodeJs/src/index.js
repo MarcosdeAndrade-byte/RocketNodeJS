@@ -22,6 +22,21 @@ function verifyIfExistsAccountCPF(request, response, next){
     return next();
 }
 
+//Função para calcular o crédito e o débito feito pelo usuário
+function getBalance(statement){
+      //Se o tipo de operação for igual a crédito acumulamos os valores
+      const balance = statement.reduce((acumulador,operation) => {
+      if(operation.type === 'credit'){
+          return acumulador + operation.amount;
+      //Se não,retiramos dinheiro da conta
+      }else{
+          return acumulador - operation.amount;
+      }
+   },0);
+
+   return balance;
+}
+
 app.post("/account", (request, response)=>{
   const {cpf, name} = request.body; 
 
@@ -72,6 +87,31 @@ app.post("/deposit",verifyIfExistsAccountCPF,(request,response) => {
 
     customer.statement.push(statementOperation);
     //console.log(customer); <-- Verificar se o depósito foi feito
+    return response.status(201).send();
+});
+
+app.post("/withdraw",verifyIfExistsAccountCPF,(request, response) => {
+    //Pegamos a quantia pelo body
+    const { amount } = request.body;
+    //Acessamos o valor disponível na conta 
+    const { customer } = request;
+    //fazemos o cálculo de crédito ou débito
+    const balance = getBalance(customer.statement);
+
+    //Se existir divergência nos valores retornamos um erro
+    if(balance < amount){
+      return response.status(400).json({error: "Insufficient funds!"});
+    }
+
+    //registramos os dados no customers
+    const statementOperation = {
+      amount,
+      created_at: new Date(),
+      type: "debit"
+    };
+
+    customer.statement.push(statementOperation);
+    //retornamos um status code de 201
     return response.status(201).send();
 });
 
