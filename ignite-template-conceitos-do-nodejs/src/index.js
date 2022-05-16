@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 
- const { v4: uuidv4 } = require('uuid');
+ const { v4: uuidv4,validate: uuidValidate} = require('uuid');
+const { query } = require('express');
 
 const app = express();
 
@@ -43,6 +44,44 @@ function checksExistsUserName(request, response, next) {
   return next();
 }
 
+function checksCreateTodosUserAvailability(request, response, next) {
+  const  user  = request.ExistsUser;
+
+  if(user.pro != "true" && user.todos.length > 9){
+    return response.status(403).json("Assine o plano PRO para anotar mais tarefas!");
+  }
+
+  return next();
+}
+
+function checksTodoExists(request, response, next){
+  const user_id = request.query["id"];
+  const { username } = request.headers;
+  const { todos } = request.ExistsUser;
+
+  try{
+     const userVerification = users.find(find => find.username === username);
+     const { id } = todos.find((find) => find.id === user_id);
+     uuidValidate(id);
+  }catch(e){
+    console.log("Erro encontrado: ",e.message);
+    return response.status(404).json("Erro encontrado,consultar log do sistema").send()
+  }
+
+  return next();
+}
+
+function findUserById(request, response, next){
+  const query_users_id = request.query["users_id"];
+  const ExistsUser = users.find((ExistsUser) => ExistsUser.id === query_users_id);
+
+  if(!ExistsUser){
+    return response.status(404).json({error: "Usuário não encontrado" });
+ }
+
+ return next();
+}
+
 //Método para criar usuário
 app.post('/users',checksExistsUserName,(request, response) => {
    const {name,username} = request.body;
@@ -51,6 +90,7 @@ app.post('/users',checksExistsUserName,(request, response) => {
      id : uuidv4(),
      name,
      username,
+     pro : "false",
      todos: []
    });
 
@@ -58,13 +98,13 @@ app.post('/users',checksExistsUserName,(request, response) => {
 });
 
 // Método para pegar todas as tarefas de um usuário
-app.get('/todos', checksExistsUserAccount, (request, response) => {
+app.get('/todos',checksExistsUserAccount,checksTodoExists,findUserById,(request, response) => {
    const { todos } = request.ExistsUser;
    return response.status(201).json(todos).send();
 });
 
 //Método para criar tarefa 
-app.post('/todos', checksExistsUserAccount, (request, response) => {
+app.post('/todos', checksExistsUserAccount,checksCreateTodosUserAvailability,(request, response) => {
   const user   = request.ExistsUser;
   const { title,deadline } = request.body;
  
