@@ -6,9 +6,9 @@
 * [Segundo Projeto Com NodeJs](https://github.com/MarcosdeAndrade-byte/RocketNodeJS/tree/main/ignite-template-conceitos-do-nodejs)
 * [Terceiro Projeto Com Node.Js](https://github.com/MarcosdeAndrade-byte/RocketNodeJS/tree/main/ignite-template-corrigindo-o-codigo)
 
-### :point_right: Objetivo: 
+### :point_right: Objetivos: 
 
-Aprender a tecnologia Node.Js para atuar em projetos reais
+Aprender tecnologias para me profissionalizar e atuar em projetos reais
 
 ### :handshake: Contribuições: 
 * Agradeço aos meus pais por apoiarem minha carreira como desenvolvedor ❤.
