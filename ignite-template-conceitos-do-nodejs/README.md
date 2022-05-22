@@ -9,6 +9,12 @@ tarefas (em inglês *todos*). Será permitida a criação de um usuário�
 - Marcar um *todo* como feito;
 - Excluir um *todo*;
 
+### :wrench: Instalação: 
+1. Para utilizar o servidor clone o projeto ou baixe o .Zip
+2. Descompacte o arquivo e adicione na sua IDE
+3. Para adicionar os modulos no projeto execute o comando: yarn init
+4. Para rodar o servidor digite: yarn dev
+
 ## :heavy_check_mark: POST Criar usuário
 ```
 localhost:3333/users
