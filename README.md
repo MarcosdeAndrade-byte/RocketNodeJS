@@ -2,8 +2,8 @@
 
 ### Projetos Desenvolvidos: 
 * [Fundamentos Node.Js](https://github.com/MarcosdeAndrade-byte/RocketNodeJS/tree/main/FundamentosNodeJs)
-* [Primeiro Projeto Com Node.Js](https://github.com/MarcosdeAndrade-byte/RocketNodeJS/tree/ac207bf3e6c31d1f6234c4c66494a5c8a31ee254)
-* [Segundo Projeto Com NodeJs](https://github.com/MarcosdeAndrade-byte/RocketNodeJS/tree/19438819ab72ebf34942e863271d3c86b772ba09)
+* [Primeiro Projeto Com Node.Js](https://github.com/MarcosdeAndrade-byte/RocketNodeJS/tree/main/ignite-template-conceitos-do-nodejs)
+* [Segundo Projeto Com NodeJs](https://github.com/MarcosdeAndrade-byte/RocketNodeJS/tree/main/ignite-template-conceitos-do-nodejs)
 * [Terceiro Projeto Com Node.Js](https://github.com/MarcosdeAndrade-byte/RocketNodeJS/tree/main/ignite-template-corrigindo-o-codigo)
 
 ### :point_right: Objetivo: 
