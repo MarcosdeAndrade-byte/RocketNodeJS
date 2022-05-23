@@ -7,7 +7,8 @@ Nesse desafio, temos uma aplicação Node.js que está em processo de desenvolv
 
 1. Para utilizar o servidor clone o projeto ou baixe o .Zip
 2. Descompacte o arquivo e adicione na sua IDE
-3. Para rodar o servidor digite yarn dev
+3. Para adicionar os modulos no projeto execute o comando: yarn init
+4. Para rodar o servidor digite: yarn dev
 
 ### GET repositories 
 ```
