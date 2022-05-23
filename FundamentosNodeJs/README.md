@@ -1,6 +1,6 @@
-# Fundamentos Node.Js
+# <img align="center" alt="marcos-Js" height="40px" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"/> Fundamentos Node.Js
 
-## Objetivo:
+### Objetivo:
 Um projeto simples feito durante as aulas para treinar os conceitos aprendidos no curso, os dados foram colocados direto na aplicação.
 
 ### :wrench: Instalação: 
