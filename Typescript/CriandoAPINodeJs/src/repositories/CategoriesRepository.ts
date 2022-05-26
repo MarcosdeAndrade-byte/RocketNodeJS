@@ -28,6 +28,11 @@ class CategoriesRepository {
         // Depois podemos utilizar o método push para adicionar o objeto
         this.categories.push(category);
     }
+
+    // O método list do tipo Category[] retorna todas as categorias
+    list(): Category[] {
+        return this.categories;
+    }
 }
 
 export { CategoriesRepository };
