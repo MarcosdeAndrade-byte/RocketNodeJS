@@ -70,18 +70,14 @@
                 }
             }
         ],
-        "import/no-extraneous-dependencies": [
-            "error",
-            {
-                "devDependencies": [
-                    "**/*.spec.js"
-                ]
-            }
-        ]
-    },
+        // Forbid the use of extraneous packages
+		"import/no-extraneous-dependencies": ["error", {"devDependencies": ["**/*.test.ts", "**/*.test.tsx"]}]
+	},
     "settings": {
         "import/resolver": {
-            "typescript": {}
+          "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+          }
         }
-    }
+      }
 }

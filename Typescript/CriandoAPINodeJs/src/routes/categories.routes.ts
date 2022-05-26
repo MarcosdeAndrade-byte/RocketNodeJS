@@ -1,29 +1,17 @@
 import { Router } from 'express';
-
-import { Category } from '../model/Category';
+import { CategoriesRepository } from '../repositories/CategoriesRepository';
 
 const categoriesRoutes = Router();
-
-// a variável categories do tipo category[] recebe um Array
-const categories: Category[] = [];
+const categoriesRepository = new CategoriesRepository();
 
 categoriesRoutes.post('/', (request, response) => {
+    // Recebemos os dados do Body
     const { name, description } = request.body;
 
-    // Instanciamos uma variável do tipo Category
-    const category = new Category();
+    // Adicionamos na instância do CategoriesRepository
+    categoriesRepository.create({ name, description });
 
-    // Uma nova forma de adicionar informação no objeto category(Objeto,O que vai ser adicionado)
-    Object.assign(category, {
-        name,
-        description,
-        // id: uuidV4(),<-- Delegamos a responsabilidade de gerar um Id para Classe Category
-        created_at: new Date(),
-    });
-
-    // Depois podemos utilizar o método push para adicionar o objeto
-    categories.push(category);
-    return response.status(201).json(category).send();
+    return response.status(201).send();
 });
 
 export { categoriesRoutes };
