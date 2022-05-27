@@ -1,16 +1,20 @@
 import { Router } from 'express';
+
 import { CategoriesRepository } from '../repositories/CategoriesRepository';
+import { CreateCategoryService } from '../services/CreateCategoryService';
 
 const categoriesRoutes = Router();
 const categoriesRepository = new CategoriesRepository();
 
+// Modificamos nossa rota para atender ao princípio SOLID de responsabilidade única (Nossa rota é responsável apenas por servir os dados)
 categoriesRoutes.post('/', (request, response) => {
-    // Recebemos os dados do Body
     const { name, description } = request.body;
 
-    // Adicionamos na instância do CategoriesRepository
-    categoriesRepository.create({ name, description });
+    // Criamos uma nova categoria e passamos o repositório principal
+    // eslint-disable-next-line prettier/prettier
+    const createCategoryService = new CreateCategoryService(categoriesRepository);
 
+    createCategoryService.execute({ name, description });
     return response.status(201).send();
 });
 

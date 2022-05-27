@@ -33,6 +33,12 @@ class CategoriesRepository {
     list(): Category[] {
         return this.categories;
     }
+
+    // Vamos verificar se existe alguma categoria repetida
+    findByName(name: string): Category {
+        const category = this.categories.find(i => i.name === name);
+        return category;
+    }
 }
 
 export { CategoriesRepository };
