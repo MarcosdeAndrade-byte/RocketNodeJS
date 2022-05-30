@@ -1,4 +1,4 @@
-import { CategoriesRepository } from '../repositories/CategoriesRepository';
+import { ICategoriesRepository } from '../repositories/ICategoriesRepository';
 
 // Para ter acesso aos dados teríamos que instanciar
 interface IRequest {
@@ -8,15 +8,9 @@ interface IRequest {
 
 // Classe para criar categorias
 class CreateCategoryService {
-    // Atributo do tipo CategoriesRepository (Nosso repositório principal)
-    // Estamos fazendo um injeção de dependência, o responsável por chamar o service que tem a obrigação de passar o repositório
-    private categoriesRepository: CategoriesRepository;
+    constructor(private categoriesRepository: ICategoriesRepository) {}
 
-    constructor(categoriesRepository: CategoriesRepository) {
-        this.categoriesRepository = categoriesRepository;
-    }
-
-    execute({ name, description }: IRequest) {
+    execute({ name, description }: IRequest): void {
         // Verificamos se a categoria não existe através do nome
         // eslint-disable-next-line prettier/prettier
         const categoryAlreadyExists = this.categoriesRepository.findByName(name);

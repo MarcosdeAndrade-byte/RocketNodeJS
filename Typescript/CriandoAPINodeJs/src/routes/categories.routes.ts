@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
-import { CategoriesRepository } from '../repositories/CategoriesRepository';
+import { PostgresCategoriesRepository } from '../repositories/PostgresCategoriesRepository';
 import { CreateCategoryService } from '../services/CreateCategoryService';
 
 const categoriesRoutes = Router();
-const categoriesRepository = new CategoriesRepository();
+const categoriesRepository = new PostgresCategoriesRepository();
 
 // Modificamos nossa rota para atender ao princípio SOLID de responsabilidade única (Nossa rota é responsável apenas por servir os dados)
 categoriesRoutes.post('/', (request, response) => {

@@ -1,11 +1,10 @@
 import { Category } from '../model/Category';
+import {
+    ICategoriesRepository,
+    ICreateCategoryDTO,
+} from './ICategoriesRepository';
 
-// DTO => Data transfer object
-interface ICreateCategoryDTO {
-    name: string;
-    description: string;
-}
-class CategoriesRepository {
+class CategoriesRepository implements ICategoriesRepository {
     // O atributo categories do tipo Category é privado!
     private categories: Category[];
 
