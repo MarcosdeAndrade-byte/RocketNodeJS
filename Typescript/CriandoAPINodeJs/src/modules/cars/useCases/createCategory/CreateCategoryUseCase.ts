@@ -1,4 +1,4 @@
-import { ICategoriesRepository } from '../repositories/ICategoriesRepository';
+import { ICategoriesRepository } from '../../repositories/ICategoriesRepository';
 
 // Para ter acesso aos dados teríamos que instanciar
 interface IRequest {
@@ -7,7 +7,7 @@ interface IRequest {
 }
 
 // Classe para criar categorias
-class CreateCategoryService {
+class CreateCategoryUseCase {
     constructor(private categoriesRepository: ICategoriesRepository) {}
 
     execute({ name, description }: IRequest): void {
@@ -25,4 +25,4 @@ class CreateCategoryService {
     }
 }
 
-export { CreateCategoryService };
+export { CreateCategoryUseCase };
