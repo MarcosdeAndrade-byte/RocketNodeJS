@@ -3,7 +3,7 @@ import { ListCategoriesController } from './ListCategoriesController';
 import { ListCategoriesUseCase } from './ListCategoriesUseCase';
 
 // categoriesRepository não depende de ninguém
-const categoriesRepository = new CategoriesRepository();
+const categoriesRepository = CategoriesRepository.getInstance();
 
 // listCategoriesUseCase depende de categoriesRepository
 const listCategoriesUseCase = new ListCategoriesUseCase(categoriesRepository);
