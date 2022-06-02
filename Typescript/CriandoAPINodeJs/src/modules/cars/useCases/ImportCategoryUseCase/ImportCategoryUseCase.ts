@@ -35,6 +35,8 @@ class ImportCategoryUseCase {
                       description,
                    });
             }).on('end', () => {
+                // Método para retirar o arquivo da pasta depois que foi lido e suas informações foram adicionadas no repositório principal
+                fs.promises.unlink(file.path);
                 resolve(categories);
             }).on('error', (err) => {
                 reject(err);
