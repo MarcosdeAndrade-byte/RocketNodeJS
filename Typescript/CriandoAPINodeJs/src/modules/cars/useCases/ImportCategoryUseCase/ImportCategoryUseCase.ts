@@ -42,9 +42,29 @@ class ImportCategoryUseCase {
         });
     }
 
+    // Função para salvar categoria no banco de dados
     async execute(file: Express.Multer.File): Promise<void> {
+        // Passamos o arquivo como argumento da função loadCategories (Responsável por retornar um array com as categorias do arquivo CSV)
         const categories = await this.loadCategories(file);
-        console.log(categories);
+        
+        // Vamos utilizar a função map para verificar se existe uma categoria repetida
+        categories.map(async (category) => {
+
+            // Desestruturação da variável categories
+            const { name, description } = category;
+
+            // Verifica se existe ou não
+            const existCategory = this.categoriesRepository.findByName(name);
+
+            // Se não existir,cria uma nova categoria no banco de dados
+            if (!existCategory) {
+                this.categoriesRepository.create({
+                    name,
+                    description,
+                })
+            }
+        })
+
     }
 }
 
